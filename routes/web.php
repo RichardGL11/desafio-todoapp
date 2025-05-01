@@ -14,4 +14,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth'], function () {
    Route::post('/todos', [TodoController::class,'store'])->name('todos.store');
    Route::get('/todos/create',[TodoController::class,'create'])->name('todos.create');
+   Route::put('/todos/{todo}', [TodoController::class,'update'])->name('todos.update');
 });

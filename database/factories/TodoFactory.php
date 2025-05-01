@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\TodoStatusEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,17 @@ class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(),
+            'status' => TodoStatusEnum::PENDING,
+            'user_id' => User::factory(),
         ];
+    }
+
+    public function completed():static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => TodoStatusEnum::COMPLETED->value
+        ]);
     }
 }
