@@ -37,4 +37,19 @@ class UpdateTodoTest extends TestCase
            'description' => 'old description'
        ]);
     }
+
+    public function test_only_the_todo_owner_can_update()
+    {
+        $user =  User::factory()->create();
+        $wrongUser = User::factory()->create();
+        $todo = Todo::factory()->for($user)->create();
+
+        $this->actingAs($wrongUser);
+        $response = $this->put(route('todos.update',$todo),[
+            'title'       => 'new title',
+            'description' => 'new description',
+            'status'      => TodoStatusEnum::COMPLETED->value
+        ]);
+        $response->assertStatus(403);
+    }
 }
