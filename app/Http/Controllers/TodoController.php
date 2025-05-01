@@ -7,7 +7,6 @@ use App\Http\Requests\TodoStoreRequest;
 use App\Models\Todo;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class TodoController extends Controller
