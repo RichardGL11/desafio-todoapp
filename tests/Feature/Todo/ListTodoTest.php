@@ -36,9 +36,9 @@ class ListTodoTest extends TestCase
        $response = $this->get('/home');
 
        $todos->each(function ($todo) use ($response){
-           $response->assertDontSee($todo->title);
-           $response->assertDontSee($todo->description);
-           $response->assertDontSee($todo->status);
+           $response->assertDontSeeText($todo->title);
+           $response->assertDontSeeText($todo->description);
+           $response->assertDontSeeText($todo->status);
        });
 
        $response->assertSee('There is no Todo');

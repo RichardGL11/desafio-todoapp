@@ -23,7 +23,9 @@
         @empty
             <p>There is no Todo</p>
         @endforelse
-        {{$todos->links()}}
+            <ul class="pagination justify-content-center">
+              {{$todos->appends(request()->query())->links()}}
+            </ul>
     </div>
 </div>
 

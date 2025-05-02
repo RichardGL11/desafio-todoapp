@@ -8,12 +8,16 @@ use Illuminate\View\Component;
 
 class TodoComponent extends Component
 {
-    public function __construct()
-    {}
     public function render(): View|Closure|string
     {
+        $query = auth()->user()->todos();
+
+        if (request()->has('status') && in_array(request('status'), ['PENDING', 'COMPLETED'])) {
+            $query->where('status', request('status'));
+        }
+
         return view('components.todo-component',[
-            'todos' => auth()->user()->todos()->simplePaginate(10)
+            'todos' => $query->simplePaginate(10)
         ]);
     }
 }
