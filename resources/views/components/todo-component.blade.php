@@ -15,13 +15,14 @@
                         </h6>
                         <p class="card-text">{{$todo->description}}</p>
                         <a href="{{route('todos.edit',$todo)}}" class="card-link">Edit</a>
-                        <a href="#" class="card-link">Mark as Completed</a>
+                        <a href="{{route('todos.mark.completed',$todo)}}" class="card-link">Mark as Completed</a>
                     </div>
                 </div>
             </div>
         @empty
             <p>There is no Todo</p>
         @endforelse
+        {{$todos->links()}}
     </div>
 </div>
 

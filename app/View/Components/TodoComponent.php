@@ -13,7 +13,7 @@ class TodoComponent extends Component
     public function render(): View|Closure|string
     {
         return view('components.todo-component',[
-            'todos' => auth()->user()->todos
+            'todos' => auth()->user()->todos()->simplePaginate(10)
         ]);
     }
 }
