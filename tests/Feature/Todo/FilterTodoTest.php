@@ -36,4 +36,17 @@ class FilterTodoTest extends TestCase
         });
         $response->assertDontSeeText('PENDING');
     }
+
+    #[Test]
+    public function test_pagination():void
+    {
+       $user =  User::factory()->create();
+       Todo::factory(20)->for($user)->completed()->create();
+       $this->actingAs($user);
+       $response = $this->get('/home');
+       $response->assertSeeText('Previous');
+       $response->assertSeeText('Next');
+    }
+
+
 }
