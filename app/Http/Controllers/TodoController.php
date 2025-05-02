@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Log;
 
 class TodoController extends Controller
 {
@@ -19,14 +18,23 @@ class TodoController extends Controller
         return view('CreateTodoView');
     }
 
+    public function edit(Todo $todo): View
+    {
+        return view('EditTodoView',[
+            'todo'  => $todo,
+            'status' => TodoStatusEnum::cases()
+        ]);
+    }
 
-    public function update(UpdateTodoRequest $request,Todo $todo):void
+
+    public function update(UpdateTodoRequest $request,Todo $todo):RedirectResponse
     {
         $this->authorize('update',$todo);
         $todo->title = $request->validated('title');
         $todo->description = $request->validated('description');
-        $todo->status = $request->validated('status');
+        $todo->status = $request->validated('status')?? $todo->status;
         $todo->save();
+        return redirect('/home');
     }
     public function store(TodoStoreRequest $request): Application|Redirector|RedirectResponse
     {
