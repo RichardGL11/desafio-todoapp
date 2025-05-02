@@ -16,6 +16,7 @@
                         <p class="card-text">{{$todo->description}}</p>
                         <a href="{{route('todos.edit',$todo)}}" class="card-link">Edit</a>
                         <a href="{{route('todos.mark.completed',$todo)}}" class="card-link">Mark as Completed</a>
+                        <a href="{{route('todos.delete',$todo)}}" class="card-link">Delete</a>
                     </div>
                 </div>
             </div>

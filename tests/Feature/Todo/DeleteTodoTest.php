@@ -17,12 +17,16 @@ class DeleteTodoTest extends TestCase
        $user =  User::factory()->create();
        $todo = Todo::factory()->for($user)->create();
        $this->actingAs($user);
+       $dashboard = $this->get('/home');
+       $dashboard->assertSee($todo->title);
        $this->delete(route('todos.delete',$todo));
        $this->assertDatabaseMissing(Todo::class,[
            'id'    => $todo->getKey(),
            'title' => $todo->title
        ]);
        $this->assertDatabaseCount(Todo::class,0);
+       $dashboard = $this->get('/dashboard');
+       $dashboard->assertDontSee($todo->title);
     }
 
     #[Test]
