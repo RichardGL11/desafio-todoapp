@@ -1,95 +1,64 @@
-### 🎯  DESAFIO TÉCNICO PARA VAGA DE ESTÁGIO COMO DESENVOLVEDOR PHP/LARAVEL SES-MT
+# Desafio TodoApp
 
-📌 Objetivo:
+Este é um desafio técnico para vaga de estágio como desenvolvedor PHP/Laravel na SES-MT. O objetivo foi criar uma aplicação simples de gestão de tarefas (To-Do List) com funcionalidades básicas de CRUD, autenticação e uma interface responsiva utilizando Bootstrap e Blade.
 
-Criar uma aplicação simples de Gestão de Tarefas (To-Do List), com funcionalidades básicas de CRUD, autenticação e uma interface responsiva utilizando Bootstrap e Blade.
+## 🚀 Tecnologias Utilizadas
 
-🛠️ Tecnologias Requeridas
-```bash
-  Backend: Laravel 12
-  
-  Frontend: Blade Template Engine + Bootstrap 5
-  
-  Banco de Dados: MySQL ou SQLite
-  
-  Autenticação: Laravel Breeze (ou Jetstream, se preferir)
-  
-  Versionamento: Git (GitHub)
-```
-✅ Funcionalidades Esperadas
-```bash
-  1. Autenticação
+- **Backend:** Laravel 12
+- **Frontend:** Blade Template Engine + Bootstrap 5
+- **Banco de Dados:** MySQL ou SQLite
+- **Autenticação:** Laravel Breeze
+- **Versionamento:** Git
 
-    * Login e cadastro de usuários.
-    
-    * Cada usuário só pode visualizar suas próprias tarefas.
-```
-🚨 Dica: [Para as permissões use Spatie (opcional)](https://spatie.be/docs/laravel-permission/v6/introduction)
+## ✅ Funcionalidades
 
-```bash
-  2. CRUD de Tarefas
+- [x] Cadastro de tarefas
+- [x] Edição de tarefas
+- [x] Exclusão de tarefas
+- [x] Marcação de tarefas como concluídas
+- [x] Filtro de tarefas por status (pendente/concluída)
+- [x] Autenticação de usuários
+- [x] Interface responsiva com Bootstrap 5
+- [x] 100% de Teste Coverage usando PHP UNIT
 
-    Listagem das tarefas com:
-    
-      * Título
-      
-      * Descrição
-      
-      * Status (Pendente, Concluída)
-      
-      * Data de criação
-      
-      * Criação de novas tarefas
-      
-      * Edição de tarefas existentes
-      
-      * Conclusão de tarefas (trocar o status para "Concluída")
-      
-      * Exclusão de tarefas
-```
-```bash
-  3. Interface
-  
-    * Utilizar Blade + Bootstrap
-    
-    * Layout base com menu fixo (navbar) contendo nome do usuário logado e opção de logout
-    
-    * Responsivo (pode testar com dev tools do navegador)
-```
-🚨 Dica: [Para o layout use AdminLte3 (opcional)](https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Installation)
+## 📦 Instalação e Execução
+
+### 1. Clone o repositório
 
 ```bash
-  4. Extra (opcional, vale ponto bônus)
-
-    * Filtro por status (Todas, Pendentes, Concluídas)
-    
-    * Paginação na listagem
-    
-    * Testes automatizados (Feature ou Unit Test com PHPUnit)
+git clone https://github.com/RichardGL11/desafio-todoapp.git
+cd desafio-todoapp
 ```
+### 2. Instale As Dependências
 
-📁 Organização do Projeto
+```bash
+composer install
+npm install
+```
+### 3. Gere uma Chave
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+### 4. Configure seu banco de dados
 
-    * Utilize boas práticas de estruturação de código (controllers, requests, models, etc.)
-    
-    * Use migrations e seeders
-    
-    * Inclua um README.md com as instruções para rodar o projeto
-    
-    * Capturas de tela (opcional)
-
-🚀 Critérios de Avaliação
-
-* Organização e legibilidade do código
-
-* Estrutura de pastas e uso correto do Laravel
-
-* Separação de responsabilidades (controller, request, model)
-
-* Uso correto do Blade e Bootstrap
-
-* Funcionalidade completa do CRUD
-
-* Git com histórico de commits claros e organizados
-
-* Capricho na UI, mesmo que simples
+```bash
+# Configure o .env com os dados do seu banco:
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=todoapp
+# DB_USERNAME=root
+# DB_PASSWORD=
+```
+### 5. Para Rodar o Projeto
+```bash
+php artisan migrate --seed
+npm run dev
+php artisan serve
+```
+### 6. Para rodar os testes com coverage
+```bash
+npm run build
+php artisan test --coverage
+```
