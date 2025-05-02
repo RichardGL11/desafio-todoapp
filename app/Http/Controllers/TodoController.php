@@ -46,4 +46,11 @@ class TodoController extends Controller
         ]);
         return redirect('/home',201);
     }
+
+    public function delete(Todo $todo): Redirector|RedirectResponse
+    {
+        $this->authorize('delete',$todo);
+        $todo->delete();
+        return redirect('/home');
+    }
 }

@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
    Route::get('/todos/create',[TodoController::class,'create'])->name('todos.create');
    Route::get('/todos/{todo}/edit',[TodoController::class,'edit'])->name('todos.edit');
    Route::match(['get','put','patch'],'/todos/{todo}', [TodoController::class,'update'])->name('todos.update');
+   Route::delete('/todos/{todo}', [TodoController::class,'delete'])->name('todos.delete');
 
    Route::get('/todos/{todo}/mark-as-completed',MarkedAsCompletedController::class)->name('todos.mark.completed');
 

@@ -12,4 +12,8 @@ class TodoPolicy
     {
         return $user->id === $todo->user->id;
     }
+    public function delete(User $user, Todo $todo): bool
+    {
+        return $user->id === $todo->user->id;
+    }
 }
