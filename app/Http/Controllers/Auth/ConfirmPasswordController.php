@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
 class ConfirmPasswordController extends Controller
 {
@@ -29,9 +30,9 @@ class ConfirmPasswordController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
+     *   @return void
      */
+    #[CodeCoverageIgnore]
     public function __construct()
     {
         $this->middleware('auth');
