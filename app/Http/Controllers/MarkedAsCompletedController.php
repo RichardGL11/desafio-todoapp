@@ -11,9 +11,10 @@ class MarkedAsCompletedController extends Controller
 {
     public function __invoke(Todo $todo): Redirector|RedirectResponse
     {
-       $this->authorize('update',$todo);
-       $todo->status = TodoStatusEnum::COMPLETED->value;
-       $todo->save();
-       return redirect('/home');
+        $this->authorize('update', $todo);
+        $todo->status = TodoStatusEnum::COMPLETED->value;
+        $todo->save();
+
+        return redirect('/home');
     }
 }

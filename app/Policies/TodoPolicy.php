@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Todo;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class TodoPolicy
 {
@@ -12,6 +11,7 @@ class TodoPolicy
     {
         return $user->id === $todo->user->id;
     }
+
     public function delete(User $user, Todo $todo): bool
     {
         return $user->id === $todo->user->id;

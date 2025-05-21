@@ -30,7 +30,8 @@ class ConfirmPasswordController extends Controller
 
     /**
      * Create a new controller instance.
-     *   @return void
+     *
+     * @return void
      */
     #[CodeCoverageIgnore]
     public function __construct()

@@ -26,10 +26,10 @@ class TodoFactory extends Factory
         ];
     }
 
-    public function completed():static
+    public function completed(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => TodoStatusEnum::COMPLETED->value
+            'status' => TodoStatusEnum::COMPLETED->value,
         ]);
     }
 }

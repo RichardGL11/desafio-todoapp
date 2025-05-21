@@ -12,34 +12,34 @@ use Tests\TestCase;
 class CreateTodoTest extends TestCase
 {
     #[Test]
-    public function it_should_be_able_to_create_a_todo():void
+    public function it_should_be_able_to_create_a_todo(): void
     {
-       $user =  User::factory()->create();
-       $this->actingAs($user);
-       $this->from('/home')->get(route('todos.create'));
-      $response =  $this->post(route('todos.store',[
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $this->from('/home')->get(route('todos.create'));
+        $response = $this->post(route('todos.store', [
             'title' => 'Todo Title',
             'description' => 'todo description',
-       ]));
+        ]));
 
-       $this->assertDatabaseHas(Todo::class,[
-           'title'       => 'Todo Title',
-           'description' => 'todo description',
-           'status'      => TodoStatusEnum::PENDING,
-           'user_id'     => $user->getKey(),
-       ]);
+        $this->assertDatabaseHas(Todo::class, [
+            'title' => 'Todo Title',
+            'description' => 'todo description',
+            'status' => TodoStatusEnum::PENDING,
+            'user_id' => $user->getKey(),
+        ]);
 
-       $this->assertDatabaseCount(Todo::class,1);
-       $response->assertStatus(201);
-       $response->assertRedirect('/home');
+        $this->assertDatabaseCount(Todo::class, 1);
+        $response->assertStatus(201);
+        $response->assertRedirect('/home');
     }
 
     #[DataProvider('title_validation_provider')]
-    public function test_title_validation_rules(array $input, string $error):void
+    public function test_title_validation_rules(array $input, string $error): void
     {
-        $user =  User::factory()->create();
+        $user = User::factory()->create();
         $this->actingAs($user);
-        $response =  $this->post(route('todos.store',[
+        $response = $this->post(route('todos.store', [
             'title' => $input['title'],
             'description' => 'todo description',
         ]));
@@ -48,11 +48,11 @@ class CreateTodoTest extends TestCase
     }
 
     #[DataProvider('title_description_provider')]
-    public function test_description_validation_rules(array $input, string $error):void
+    public function test_description_validation_rules(array $input, string $error): void
     {
-        $user =  User::factory()->create();
+        $user = User::factory()->create();
         $this->actingAs($user);
-        $response =  $this->post(route('todos.store',[
+        $response = $this->post(route('todos.store', [
             'title' => 'title for todo',
             'description' => $input['description'],
         ]));
@@ -60,8 +60,7 @@ class CreateTodoTest extends TestCase
         $response->assertSessionHasErrors(['description' => $error]);
     }
 
-
-    public static function title_validation_provider():array
+    public static function title_validation_provider(): array
     {
         return [
             'missing title' => [
@@ -73,12 +72,13 @@ class CreateTodoTest extends TestCase
                 'error' => 'The title field must be at least 3 characters.',
             ],
             'long title' => [
-                'input' => ['title' => str_repeat('a',101)],
+                'input' => ['title' => str_repeat('a', 101)],
                 'error' => 'The title field must not be greater than 100 characters.',
-            ]
+            ],
         ];
     }
-    public static function title_description_provider():array
+
+    public static function title_description_provider(): array
     {
         return [
             'missing description' => [
@@ -90,9 +90,9 @@ class CreateTodoTest extends TestCase
                 'error' => 'The description field must be at least 3 characters.',
             ],
             'long description' => [
-                'input' => ['description' => str_repeat('a',101)],
+                'input' => ['description' => str_repeat('a', 101)],
                 'error' => 'The description field must not be greater than 100 characters.',
-            ]
+            ],
         ];
     }
 }

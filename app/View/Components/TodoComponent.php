@@ -16,8 +16,8 @@ class TodoComponent extends Component
             $query->where('status', request('status'));
         }
 
-        return view('components.todo-component',[
-            'todos' => $query->simplePaginate(10)
+        return view('components.todo-component', [
+            'todos' => $query->simplePaginate(10),
         ]);
     }
 }
