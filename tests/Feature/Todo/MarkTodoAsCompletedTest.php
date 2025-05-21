@@ -19,7 +19,7 @@ class MarkTodoAsCompletedTest extends TestCase
         $user = User::factory()->create();
         $todo = Todo::factory()->for($user)->createOne();
         $this->actingAs($user);
-        $response = $this->from('/home')->get(route('todos.mark.completed', $todo));
+        $response = $this->get(route('todos.mark.completed', $todo));
         $response->assertRedirect('/home');
         $todo->refresh();
         assertTrue($todo->status == TodoStatusEnum::COMPLETED);
@@ -32,7 +32,7 @@ class MarkTodoAsCompletedTest extends TestCase
         $wrongUser = User::factory()->create();
         $todo = Todo::factory()->for($user)->createOne();
         $this->actingAs($wrongUser);
-        $response = $this->from('/home')->get(route('todos.mark.completed', $todo));
+        $response = $this->get(route('todos.mark.completed', $todo));
         $response->assertForbidden();
         $todo->refresh();
         assertFalse($todo->status == TodoStatusEnum::COMPLETED);

@@ -16,7 +16,7 @@ class CreateTodoTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user);
-        $this->from('/home')->get(route('todos.create'));
+        $this->get(route('todos.create'));
         $response = $this->post(route('todos.store', [
             'title' => 'Todo Title',
             'description' => 'todo description',

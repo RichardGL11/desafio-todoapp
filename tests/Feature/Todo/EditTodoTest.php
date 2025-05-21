@@ -15,7 +15,7 @@ class EditTodoTest extends TestCase
         $user = User::factory()->create();
         $todo = Todo::factory()->for($user)->create();
         $this->actingAs($user);
-        $response = $this->from('/home')->get(route('todos.edit', $todo));
+        $response = $this->get(route('todos.edit', $todo));
         $response->assertSee($todo->id);
         $response->assertSee($todo->title);
         $response->assertSee($todo->description);

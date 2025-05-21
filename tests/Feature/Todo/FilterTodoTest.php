@@ -16,7 +16,7 @@ class FilterTodoTest extends TestCase
         $completedTodo = Todo::factory(10)->for($user)->completed()->create();
         $pendingTodo = Todo::factory(10)->for($user)->create();
         $this->actingAs($user);
-        $response = $this->from('/home')->get('/home?status=PENDING');
+        $response = $this->get('/home?status=PENDING');
 
         $pendingTodo->each(function ($todo) use ($response) {
             $response->assertSeeText($todo->title);
@@ -25,7 +25,7 @@ class FilterTodoTest extends TestCase
         });
         $response->assertDontSeeText('COMPLETED');
 
-        $response = $this->from('/home')->get('/home?status=COMPLETED');
+        $response = $this->get('/home?status=COMPLETED');
 
         $completedTodo->each(function ($todo) use ($response) {
             $response->assertSeeText($todo->title);
