@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateTodoAction;
+use App\Actions\UpdateTodoAction;
 use App\DTO\TodoDTO;
 use App\Enums\TodoStatusEnum;
 use App\Http\Requests\TodoStoreRequest;
@@ -31,11 +32,8 @@ class TodoController extends Controller
     public function update(UpdateTodoRequest $request, Todo $todo): RedirectResponse
     {
         $this->authorize('update', $todo);
-        $todo->title = $request->validated('title');
-        $todo->description = $request->validated('description');
-        $todo->status = $request->validated('status') ?? $todo->status;
-        $todo->save();
-
+        $dto =  TodoDTO::make(...$request->validated());
+        UpdateTodoAction::execute($dto,$todo);
         return redirect('/home');
     }
 

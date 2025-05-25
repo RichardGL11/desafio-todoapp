@@ -14,6 +14,7 @@ class UpdateTodoTest extends TestCase
     #[Test]
     public function it_should_be_able_to_update_a_todo(): void
     {
+        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         $todo = Todo::factory()->for($user)->create([
             'title' => 'old title',
