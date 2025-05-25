@@ -37,7 +37,7 @@ class TodoController extends Controller
         return redirect('/home');
     }
 
-    public function store(TodoStoreRequest $request): Application|Redirector|RedirectResponse
+    public function store(TodoStoreRequest $request): RedirectResponse
     {
         Todo::query()->create([
             'title' => $request->validated('title'),
@@ -49,7 +49,7 @@ class TodoController extends Controller
         return redirect('/home', 201);
     }
 
-    public function delete(Todo $todo): Redirector|RedirectResponse
+    public function delete(Todo $todo): RedirectResponse
     {
         $this->authorize('delete', $todo);
         $todo->delete();
