@@ -10,9 +10,7 @@ use App\Http\Requests\TodoStoreRequest;
 use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Todo;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 
 class TodoController extends Controller
 {
@@ -32,15 +30,17 @@ class TodoController extends Controller
     public function update(UpdateTodoRequest $request, Todo $todo): RedirectResponse
     {
         $this->authorize('update', $todo);
-        $dto =  TodoDTO::make(...$request->validated());
-        UpdateTodoAction::execute($dto,$todo);
+        $dto = TodoDTO::make(...$request->validated());
+        UpdateTodoAction::execute($dto, $todo);
+
         return redirect('/home');
     }
 
     public function store(TodoStoreRequest $request): RedirectResponse
     {
-        $dto =  TodoDTO::make(...$request->validated());
+        $dto = TodoDTO::make(...$request->validated());
         CreateTodoAction::execute($dto);
+
         return redirect('/home', 201);
     }
 
