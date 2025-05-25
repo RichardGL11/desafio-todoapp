@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateTodoAction;
+use App\DTO\TodoDTO;
 use App\Enums\TodoStatusEnum;
 use App\Http\Requests\TodoStoreRequest;
 use App\Http\Requests\UpdateTodoRequest;
@@ -39,13 +41,8 @@ class TodoController extends Controller
 
     public function store(TodoStoreRequest $request): RedirectResponse
     {
-        Todo::query()->create([
-            'title' => $request->validated('title'),
-            'description' => $request->validated('description'),
-            'status' => TodoStatusEnum::PENDING->value,
-            'user_id' => auth()->user()->id,
-        ]);
-
+        $dto =  TodoDTO::make(...$request->validated());
+        CreateTodoAction::execute($dto);
         return redirect('/home', 201);
     }
 
